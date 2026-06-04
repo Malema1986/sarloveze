@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Résidence Sarlovèze — Compiègne</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noir:#1a1a18;
+  --gris-fonce:#3a3a38;
+  --gris:#888884;
+  --gris-clair:#c8c8c4;
+  --beige:#f0ede8;
+  --beige-clair:#f8f6f2;
+  --blanc:#ffffff;
+  --or:#b8966e;
+  --vert-bg:#e8f5ec;--vert-txt:#2d6e3e;
+  --orange-bg:#fef3e2;--orange-txt:#9a5200;
+  --rouge-bg:#fdecea;--rouge-txt:#b03025;
+  --radius:6px;--radius-lg:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--beige-clair);color:var(--noir);font-weight:300;line-height:1.7;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;font-weight:500}
+
+/* HERO */
+.hero{position:relative;height:400px;overflow:hidden;background:var(--noir)}
+.hero img{width:100%;height:100%;object-fit:cover;opacity:.75}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.15),rgba(0,0,0,0.6))}
+.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem}
+.hero-content h1{font-size:clamp(32px,6vw,52px);color:#fff;letter-spacing:2px;text-shadow:0 2px 12px rgba(0,0,0,0.4)}
+.hero-content p{margin-top:8px}
+.hero-content a{color:rgba(255,255,255,0.88);font-size:14px;letter-spacing:.8px;text-decoration:underline}
+.hero-badges{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;justify-content:center}
+.hero-badge{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);color:#fff;padding:5px 13px;border-radius:20px;font-size:12px;letter-spacing:.4px;backdrop-filter:blur(4px)}
+
+/* NAV */
+.nav{background:var(--blanc);border-bottom:1px solid var(--beige);position:sticky;top:0;z-index:50;box-shadow:0 1px 6px rgba(0,0,0,0.06);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.nav-inner{display:flex;white-space:nowrap;min-width:max-content;padding:0 1rem}
+.nav-tab{background:none;border:none;padding:15px 16px;font-family:'Jost',sans-serif;font-size:12px;font-weight:400;color:var(--gris);cursor:pointer;letter-spacing:.6px;border-bottom:2px solid transparent;transition:all .2s;text-transform:uppercase;white-space:nowrap}
+.nav-tab.active{color:var(--noir);border-bottom-color:var(--or);font-weight:500}
+.nav-tab:hover:not(.active){color:var(--noir)}
+
+/* CONTAINER */
+.container{max-width:960px;margin:0 auto;padding:2rem 1.25rem}
+.section{display:none}.section.active{display:block}
+
+/* PRÉSENTATION */
+.pres-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
+.pres-block h2{font-size:clamp(22px,3vw,28px);line-height:1.25;margin-bottom:.75rem}
+.pres-block p{font-size:14px;color:var(--gris-fonce);line-height:1.85;margin-bottom:.6rem}
+.pres-block strong{color:var(--noir);font-weight:500}
+.or-line{width:36px;height:1px;background:var(--or);margin:.9rem 0}
+.pres-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:1rem}
+.pres-tag{background:var(--beige);color:var(--gris-fonce);padding:4px 12px;border-radius:20px;font-size:12px}
+.info-card{background:var(--blanc);border:1px solid #e8e4de;border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:2rem}
+.info-card h3{font-size:clamp(18px,2.5vw,22px);margin-bottom:.75rem}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:.75rem}
+.border-left{border-left:2px solid var(--or);padding-left:.9rem}
+.border-left h4{font-size:15px;margin-bottom:.3rem}
+.border-left p{font-size:13px;color:var(--gris-fonce);line-height:1.7}
+.reglement-box{background:var(--beige);border-radius:var(--radius);padding:.9rem 1.1rem;margin-top:1rem;font-size:13px;color:var(--gris-fonce);line-height:1.7}
+.reglement-box strong{color:var(--noir)}
+
+/* INTRO SECTION */
+.section-intro{background:var(--blanc);border:1px solid #e8e4de;border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.75rem}
+.section-intro p.italic{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--gris-fonce);margin-bottom:.6rem}
+.section-intro p{font-size:14px;color:var(--gris-fonce);line-height:1.85;margin-bottom:.5rem}
+
+/* FILTRES */
+.filter-bar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.25rem}
+.filter-btn{background:var(--blanc);border:1px solid #ddd;border-radius:20px;padding:5px 14px;font-family:'Jost',sans-serif;font-size:12px;color:var(--gris);cursor:pointer;transition:all .2s}
+.filter-btn.active{background:var(--noir);border-color:var(--noir);color:#fff}
+
+/* SEGMENTS */
+.segment{margin-bottom:2rem}
+.seg-header{display:flex;align-items:baseline;gap:10px;margin-bottom:.9rem;padding-bottom:8px;border-bottom:1px solid #e8e4de}
+.seg-title{font-family:'Cormorant Garamond',serif;font-size:21px}
+.seg-count{font-size:12px;color:var(--gris)}
+.notice-cuisine{background:var(--beige);border-left:3px solid var(--or);border-radius:var(--radius);padding:.65rem 1rem;font-size:13px;color:var(--gris-fonce);margin-bottom:.9rem}
+
+/* GRILLE */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px}
+.lot-card{background:var(--blanc);border:1px solid #e8e4de;border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:all .2s}
+.lot-card:hover{border-color:var(--gris-clair);box-shadow:0 4px 18px rgba(0,0,0,0.07);transform:translateY(-2px)}
+.lot-thumb{width:100%;height:115px;background:var(--beige);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gris)}
+.lot-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.lot-card:hover .lot-thumb img{transform:scale(1.04)}
+.lot-body{padding:11px 13px}
+.lot-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500}
+.lot-meta{font-size:11px;color:var(--gris);margin-top:2px}
+.lot-footer{display:flex;justify-content:space-between;align-items:center;margin-top:9px}
+.lot-price{font-size:13px;font-weight:500}
+.badge{font-size:11px;padding:2px 9px;border-radius:20px}
+.b-libre{background:var(--vert-bg);color:var(--vert-txt)}
+.b-date{background:var(--orange-bg);color:var(--orange-txt)}
+.b-occupe{background:var(--rouge-bg);color:var(--rouge-txt)}
+
+/* LIGHTBOX PLEIN ÉCRAN */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:300;flex-direction:column;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox-img-wrap{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.lightbox-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;user-select:none}
+.lightbox-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.15);border:none;color:#fff;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center}
+.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:24px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lightbox-prev{left:12px}.lightbox-next{right:12px}
+.lightbox-prev:hover,.lightbox-next:hover{background:rgba(255,255,255,0.3)}
+.lightbox-counter{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.7);font-size:13px;letter-spacing:.5px}
+.lightbox-label{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.5);color:#fff;font-size:12px;padding:4px 12px;border-radius:20px}
+.lightbox-dl{position:absolute;bottom:16px;right:16px;background:rgba(255,255,255,0.15);color:#fff;font-size:12px;padding:6px 14px;border-radius:20px;text-decoration:none;border:1px solid rgba(255,255,255,0.3)}
+.lightbox-dl:hover{background:rgba(255,255,255,0.25)}
+
+/* MODAL LOGEMENT */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,8,0.55);z-index:100;align-items:flex-start;justify-content:center;padding:30px 12px;overflow-y:auto;backdrop-filter:blur(3px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--blanc);border-radius:12px;width:min(660px,100%);margin-bottom:40px;overflow:hidden}
+.modal-close-btn{position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.4);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center}
+
+/* CAROUSEL DANS MODAL */
+.m-carousel{position:relative;background:#111;height:340px;overflow:hidden}
+.m-carousel-track{display:flex;height:100%;transition:transform .38s cubic-bezier(.4,0,.2,1);will-change:transform}
+.m-slide{min-width:100%;width:100%;height:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:zoom-in}
+.m-slide img{max-width:100%;max-height:100%;object-fit:contain;pointer-events:none;user-select:none}
+.m-slide.placeholder{cursor:default;color:var(--gris);font-size:13px}
+.m-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.88);border:none;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5;transition:all .15s}
+.m-btn:hover{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+.m-prev{left:10px}.m-next{right:10px}
+.m-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:5}
+.m-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.45);cursor:pointer;transition:all .2s}
+.m-dot.active{background:#fff;width:18px;border-radius:3px}
+.m-label{position:absolute;top:10px;left:12px;background:rgba(0,0,0,0.5);color:#fff;font-size:11px;padding:3px 10px;border-radius:20px;pointer-events:none}
+.m-counter{position:absolute;bottom:8px;right:12px;background:rgba(0,0,0,0.5);color:#fff;font-size:11px;padding:3px 10px;border-radius:20px;pointer-events:none}
+.m-dl{position:absolute;bottom:8px;left:12px;background:rgba(0,0,0,0.5);color:#fff;font-size:11px;padding:3px 10px;border-radius:20px;text-decoration:none;border:none;cursor:pointer}
+.m-dl:hover{background:rgba(0,0,0,0.75)}
+.m-body{padding:1.4rem}
+.m-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin-bottom:3px}
+.m-sub{font-size:12px;color:var(--gris);margin-bottom:1.1rem;letter-spacing:.2px}
+.m-info{display:flex;gap:1.25rem;flex-wrap:wrap;background:var(--beige-clair);border-radius:var(--radius);padding:.9rem 1.1rem;margin-bottom:1rem}
+.m-info-item label{font-size:10px;color:var(--gris);text-transform:uppercase;letter-spacing:.8px;display:block;margin-bottom:1px}
+.m-info-item span{font-size:14px;font-weight:500}
+.m-desc{font-size:13px;color:var(--gris-fonce);line-height:1.75;padding:.9rem 1.1rem;border:1px solid #e8e4de;border-radius:var(--radius);margin-bottom:1rem}
+.m-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn-dark{background:var(--noir);color:#fff;border:none;border-radius:var(--radius);padding:9px 20px;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;letter-spacing:.4px}
+.btn-dark:hover{background:var(--gris-fonce)}
+.btn-or{background:var(--or);color:#fff;border:none;border-radius:var(--radius);padding:9px 20px;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer}
+.btn-or:hover{opacity:.88}
+.btn-ghost{background:transparent;color:var(--gris-fonce);border:1px solid #ddd;border-radius:var(--radius);padding:9px 20px;font-family:'Jost',sans-serif;font-size:13px;cursor:pointer}
+.btn-ghost:hover{background:var(--beige)}
+
+/* ESPACES COMMUNS */
+.communs-section{margin-bottom:1.75rem}
+.communs-section h3{font-family:'Cormorant Garamond',serif;font-size:21px;margin-bottom:.5rem}
+.communs-section .intro{font-size:13px;color:var(--gris-fonce);margin-bottom:1rem;line-height:1.7}
+.communs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px}
+.commun-card{background:var(--blanc);border:1px solid #e8e4de;border-radius:var(--radius-lg);overflow:hidden;cursor:pointer;transition:all .2s}
+.commun-card:hover{border-color:var(--gris-clair);box-shadow:0 4px 18px rgba(0,0,0,0.07);transform:translateY(-2px)}
+.commun-thumb{height:125px;background:var(--beige);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:28px}
+.commun-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.commun-card:hover .commun-thumb img{transform:scale(1.04)}
+.commun-body{padding:11px 13px}
+.commun-body h4{font-family:'Cormorant Garamond',serif;font-size:16px;margin-bottom:3px}
+.commun-body p{font-size:12px;color:var(--gris);line-height:1.5}
+.commun-body .voir{font-size:11px;color:var(--or);margin-top:5px;letter-spacing:.3px}
+.communs-divider{height:1px;background:#e8e4de;margin:1.75rem 0}
+.commun-card-big{background:var(--blanc);border:1px solid #e8e4de;border-radius:var(--radius-lg);overflow:hidden;display:grid;grid-template-columns:320px 1fr;gap:0}
+.commun-big-photo{height:100%;min-height:260px;background:var(--beige);overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.commun-big-photo img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.commun-big-photo:hover img{transform:scale(1.04)}
+.commun-big-body{padding:1.5rem}
+.commun-big-items{display:flex;flex-direction:column;gap:1rem}
+.commun-big-item{display:flex;align-items:flex-start;gap:.75rem}
+.commun-icon{font-size:22px;flex-shrink:0;margin-top:2px}
+.commun-big-item h4{font-family:'Cormorant Garamond',serif;font-size:16px;margin-bottom:2px}
+.commun-big-item p{font-size:12px;color:var(--gris);line-height:1.5}
+@media(max-width:650px){.commun-card-big{grid-template-columns:1fr}.commun-big-photo{min-height:200px}}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.75rem}
+.contact-card{background:var(--blanc);border:1px solid #e8e4de;border-radius:var(--radius-lg);padding:1.75rem;text-align:center}
+.contact-card .icon{font-size:34px;margin-bottom:.9rem;display:block}
+.contact-card h3{font-family:'Cormorant Garamond',serif;font-size:21px;margin-bottom:.6rem}
+.contact-card p{font-size:13px;color:var(--gris-fonce);line-height:1.75;margin-bottom:1.25rem}
+
+/* FOOTER */
+.footer{background:var(--noir);text-align:center;padding:1.25rem;font-size:12px;letter-spacing:.3px;margin-top:2.5rem}
+.footer a{color:rgba(255,255,255,0.45);text-decoration:none}
+.footer a:hover{color:rgba(255,255,255,0.7)}
+
+/* RESPONSIVE */
+@media(max-width:650px){
+  .hero{height:320px}
+  .pres-grid,.two-col,.contact-grid{grid-template-columns:1fr}
+  .m-carousel{height:260px}
+  .grid,.communs-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="https://drive.google.com/thumbnail?id=19KYMcJbUNv_9w7qVSEMsEulnVse5QRah&sz=w1200" alt="Résidence Sarlovèze" onerror="this.style.display='none'">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Résidence Sarlovèze</h1>
+    <p><a href="https://www.google.com/maps/search/9+rue+Fournier+Sarloveze+60200+Compiegne" target="_blank">📍 9 rue Fournier Sarlovèze — 60200 Compiègne</a></p>
+    <div class="hero-badges">
+      <span class="hero-badge">À 900 m de l'UTC</span>
+      <span class="hero-badge">Centre-ville</span>
+      <span class="hero-badge">Parc du château</span>
+      <span class="hero-badge">Loyer tout compris</span>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="showTab('presentation')">La résidence</button>
+    <button class="nav-tab" onclick="showTab('independants')">Logements indépendants</button>
+    <button class="nav-tab" onclick="showTab('colocation')">Chambres</button>
+    <button class="nav-tab" onclick="showTab('communs')">Espaces communs</button>
+    <button class="nav-tab" onclick="showTab('contact')">Contact & dossier</button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- LA RÉSIDENCE -->
+  <div id="presentation" class="section active">
+    <div class="pres-grid">
+      <div class="pres-block">
+        <h2>Une adresse d'exception au cœur de Compiègne</h2>
+        <div class="or-line"></div>
+        <p>Implantée dans une <strong>ancienne étude notariale du XIX° siècle</strong> entièrement réhabilitée, la Résidence Sarlovèze offre un cadre de vie rare : le charme de l'architecture ancienne — hauts plafonds, parquet, cheminées — allié au confort d'un logement entièrement <strong>rénové et meublé</strong>.</p>
+        <p><strong>À 900 m de l'UTC</strong>, à deux pas du <strong>parc du château</strong> et des <strong>commerces du centre-ville</strong>, tout est accessible à pied.</p>
+        <p><strong>Loyer tout compris</strong> — eau, électricité, chauffage, internet fibre optique, ménage des parties communes.</p>
+        <p><em>Vivez au centre de tout, sans vous soucier de rien.</em></p>
+        <div class="pres-tags">
+          <span class="pres-tag">Meublé</span><span class="pres-tag">Charges incluses</span>
+          <span class="pres-tag">Fibre optique</span><span class="pres-tag">Accès sécurisés</span>
+          <span class="pres-tag">Salle de bain privative</span>
+        </div>
+      </div>
+      <div class="pres-block">
+        <h2>Comment est organisée la résidence ?</h2>
+        <div class="or-line"></div>
+        <p>Le rez-de-chaussée est occupé par des <strong>professions libérales</strong>. Les étages sont entièrement dédiés aux logements.</p>
+        <p>La résidence se compose de <strong>deux bâtiments distincts</strong> :</p>
+        <div class="two-col" style="margin-top:.75rem">
+          <div class="border-left"><h4>Bâtiment principal</h4><p>Logements 1 à 15 — situé sur rue. Studios indépendants et chambres avec cuisine partagée aux 1er et 2ème étages.</p></div>
+          <div class="border-left"><h4>La dépendance</h4><p>Logements 16 à 21 — accessible depuis la cour intérieure sécurisée. Studios et T2 entièrement indépendants.</p></div>
+        </div>
+        <div class="reglement-box">
+          <strong>Vie en résidence</strong> — Lieu de vie calme et respectueux. Silence imposé après <strong>22h</strong>. Les parties communes sont réservées aux seuls résidents ; les personnes extérieures n'y sont <strong>pas les bienvenues</strong>. Tous les accès sont <strong>sécurisés par digicode</strong>.
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>Deux types de logements</h3>
+      <div class="two-col">
+        <div class="border-left"><h4>Logements indépendants</h4><p>Studios et T2 entièrement autonomes avec cuisine et salle de bain privatives. Totale indépendance garantie.</p></div>
+        <div class="border-left"><h4>Chambres avec cuisine partagée</h4><p>Salle de bain privative (douche, lavabo, WC) pour chaque chambre. Cuisine partagée sur le palier avec ménage hebdomadaire inclus.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGEMENTS INDÉPENDANTS -->
+  <div id="independants" class="section">
+    <div class="section-intro">
+      <p class="italic">Studios et T2 entièrement autonomes, idéaux pour ceux qui souhaitent une totale indépendance.</p>
+      <div class="or-line"></div>
+      <p>Chaque logement dispose d'une <strong>cuisine équipée privative</strong> et d'une <strong>salle de bain avec WC</strong>. Tous les logements sont entièrement meublés, loyer tout compris.</p>
+      <p>Accès inclus aux <strong>espaces communs</strong> : laverie, salle de sport, garage à vélo sécurisé et cour intérieure avec espace barbecue.</p>
+    </div>
+    <div class="segment">
+      <div class="seg-header"><span class="seg-title">Bâtiment principal</span><span class="seg-count" id="cnt-principal"></span></div>
+      <div class="grid" id="grid-principal"></div>
+    </div>
+    <div class="segment">
+      <div class="seg-header"><span class="seg-title">Dépendance</span><span class="seg-count" id="cnt-dependance"></span></div>
+      <div class="grid" id="grid-dependance"></div>
+    </div>
+  </div>
+
+  <!-- CHAMBRES -->
+  <div id="colocation" class="section">
+    <div class="section-intro">
+      <p class="italic">Des chambres dans l'esprit d'une chambre d'hôtel, pour un cadre de vie confortable et convivial.</p>
+      <div class="or-line"></div>
+      <p>Chaque chambre dispose de sa propre <strong>salle de bain privative avec douche, lavabo et WC</strong>. La <strong>cuisine commune du palier</strong> est partagée avec 5 autres chambres — <strong>ménage hebdomadaire</strong> inclus dans le loyer.</p>
+      <p>Tous les logements sont entièrement meublés, loyer tout compris. Accès inclus aux <strong>espaces communs</strong> : laverie, salle de sport, garage à vélo et cour intérieure.</p>
+    </div>
+    <div class="segment">
+      <div class="seg-header"><span class="seg-title">1er étage</span><span class="seg-count" id="cnt-1er"></span></div>
+      <div class="notice-cuisine">🍳 Cuisine partagée réservée aux locataires du 1er étage (chambres 2 à 7)</div>
+      <div class="grid" id="grid-1er"></div>
+    </div>
+    <div class="segment">
+      <div class="seg-header"><span class="seg-title">2ème étage</span><span class="seg-count" id="cnt-2eme"></span></div>
+      <div class="notice-cuisine">🍳 Cuisine partagée réservée aux locataires du 2ème étage (chambres 8 à 13)</div>
+      <div class="grid" id="grid-2eme"></div>
+    </div>
+  </div>
+
+  <!-- ESPACES COMMUNS -->
+  <div id="communs" class="section">
+    <div class="communs-section">
+      <h3>Espaces communs à tous les résidents</h3>
+      <p class="intro">Ces espaces sont accessibles à l'ensemble des résidents des deux bâtiments.</p>
+      <div class="commun-card-big" id="card-communs-tous">
+        <div class="commun-big-photo" id="commun-big-photo">
+          <span style="font-size:28px">⏳</span>
+        </div>
+        <div class="commun-big-body">
+          <div class="commun-big-items">
+            <div class="commun-big-item"><span class="commun-icon">🧺</span><div><h4>Laverie</h4><p>Machines à laver en libre service au sous-sol du bâtiment principal</p></div></div>
+            <div class="commun-big-item"><span class="commun-icon">🏋️</span><div><h4>Salle de sport</h4><p>Équipements de fitness en libre accès au sous-sol</p></div></div>
+            <div class="commun-big-item"><span class="commun-icon">🚲</span><div><h4>Garage à vélo</h4><p>Local sécurisé dans la cour fermée de la dépendance</p></div></div>
+            <div class="commun-big-item"><span class="commun-icon">🌿</span><div><h4>Cour intérieure</h4><p>Cour fermée et sécurisée avec espace barbecue et table de pique-nique</p></div></div>
+          </div>
+          <button class="btn-or" onclick="openCommunsAll()" style="margin-top:1.25rem;width:100%">📷 Voir toutes les photos</button>
+        </div>
+      </div>
+    </div>
+    <div class="communs-divider"></div>
+    <div class="communs-section">
+      <h3>Cuisine du 1er étage</h3>
+      <div class="notice-cuisine" style="margin-bottom:1rem">🍳 Réservée exclusivement aux locataires des chambres 2 à 7</div>
+      <div class="communs-grid" id="grid-cuisine-1er"></div>
+    </div>
+    <div class="communs-divider"></div>
+    <div class="communs-section">
+      <h3>Cuisine du 2ème étage</h3>
+      <div class="notice-cuisine" style="margin-bottom:1rem">🍳 Réservée exclusivement aux locataires des chambres 8 à 13 et des studios 14 &amp; 15</div>
+      <div class="communs-grid" id="grid-cuisine-2eme"></div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="section">
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="contact-icon">✉️</span>
+        <h3>Prise de contact rapide</h3>
+        <p>Un logement vous intéresse ? Laissez-nous vos coordonnées, nous vous recontactons dans les plus brefs délais.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeP-uZPfuPuO0SEosR3EQtJce5-DGNZgsnEZu_noMsge_hL_g/viewform" target="_blank" style="display:block">
+          <button class="btn-or" style="width:100%">Nous contacter</button>
+        </a>
+      </div>
+      <div class="contact-card">
+        <span class="contact-icon">📋</span>
+        <h3>Déposer un dossier</h3>
+        <p>Remplissez le dossier complet. Nous vous enverrons ensuite un email pour vous demander les pièces justificatives.</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScKe8OM_l2iczVte6Lr_uUny4rrIvVIth495-JF8rwPNmXO5g/viewform" target="_blank" style="display:block">
+          <button class="btn-dark" style="width:100%">Déposer mon dossier</button>
+        </a>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>Pièces demandées</h3>
+      <div class="two-col" style="margin-top:.75rem">
+        <div class="border-left"><h4>Pour le garant</h4><p>Dernier avis d'imposition · 3 derniers bulletins de salaire · Pièce d'identité recto/verso</p></div>
+        <div class="border-left"><h4>Pour le locataire</h4><p>Pièce d'identité recto/verso</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL LOGEMENT -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" style="position:relative">
+    <button class="modal-close-btn" onclick="closeModal()">✕</button>
+    <div class="m-carousel" id="m-carousel">
+      <div class="m-carousel-track" id="m-track"></div>
+      <button class="m-btn m-prev" onclick="mPrev()">‹</button>
+      <button class="m-btn m-next" onclick="mNext()">›</button>
+      <div class="m-dots" id="m-dots"></div>
+      <div class="m-label" id="m-label"></div>
+      <div class="m-counter" id="m-counter"></div>
+      <a class="m-dl" id="m-dl" href="#" download target="_blank">⬇ Télécharger</a>
+    </div>
+    <div class="m-body">
+      <div class="m-title" id="m-title"></div>
+      <div class="m-sub" id="m-sub"></div>
+      <div class="m-info" id="m-info"></div>
+      <div class="m-desc" id="m-desc"></div>
+      <div class="m-actions">
+        <button class="btn-or" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLScKe8OM_l2iczVte6Lr_uUny4rrIvVIth495-JF8rwPNmXO5g/viewform','_blank')">Déposer un dossier</button>
+        <button class="btn-ghost" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeP-uZPfuPuO0SEosR3EQtJce5-DGNZgsnEZu_noMsge_hL_g/viewform','_blank')">Prendre contact</button>
+        <button class="btn-ghost" onclick="closeModal()">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX PLEIN ÉCRAN -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-prev" onclick="lbPrev()">‹</button>
+  <div class="lightbox-img-wrap">
+    <img id="lb-img" src="" alt="">
+  </div>
+  <button class="lightbox-next" onclick="lbNext()">›</button>
+  <div class="lightbox-label" id="lb-label"></div>
+  <div class="lightbox-counter" id="lb-counter"></div>
+  <a class="lightbox-dl" id="lb-dl" href="#" download target="_blank">⬇ Télécharger</a>
+</div>
+
+<div class="footer">
+  <a href="https://www.google.com/maps/search/9+rue+Fournier+Sarloveze+60200+Compiegne" target="_blank">📍 Résidence Sarlovèze · 9 rue Fournier Sarlovèze · 60200 Compiègne</a>
+</div>
+
+<script>
+const API="https://script.google.com/macros/s/AKfycbzl98o4qZuurQxcTIRKbdm5ViuUclpig8zP94mVeWnjYI5xN3HwbNIyDFj8hEnpzSri/exec";
+const SHEET="https://docs.google.com/spreadsheets/d/e/2PACX-1vQfaIMuhsobYPKRgNxOBlHQPTeqwh6frd-M0W1wV0q8-Ljy6KOciLphlCrGFBgSSn0OgyN0s5fqaPOi/pub?gid=38859506&single=true&output=csv";
+
+const photoCache={}, dispoCache={};
+
+async function fetchPhotos(folder){
+  if(photoCache[folder]!==undefined) return photoCache[folder];
+  try{
+    const r=await fetch(`${API}?folder=${encodeURIComponent(folder)}`);
+    const d=await r.json();
+    photoCache[folder]=Array.isArray(d)?d:[];
+  }catch(e){photoCache[folder]=[];}
+  return photoCache[folder];
+}
+
+async function loadDispos(){
+  try{
+    const r=await fetch(SHEET+'&t='+Date.now());
+    const txt=await r.text();
+    txt.trim().split('\n').slice(1).forEach(line=>{
+      const c=line.split(',');
+      if(!c[0]) return;
+      const lot=c[0].trim().replace(/"/g,'').replace(/\r/g,'');
+      if(!lot||lot==='lot') return;
+      const raw=(c[2]||'').trim().replace(/"/g,'').replace(/\r/g,'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      const statut=raw.startsWith('lib')?'libre':raw.startsWith('occ')?'occupe':raw.startsWith('dat')?'date':'libre';
+      const date=c[3]?(c[3].trim().replace(/"/g,'').replace(/\r/g,'')):'';
+      dispoCache[lot]={statut,date};
+    });
+  }catch(e){}
+}
+
+const LOTS=[
+  {id:"1", label:"Studio 1", groupe:"indep", sous:"principal", type:"Studio", etage:"RDC", bat:"Principal", surface:18, loyer:500, folder:"1", desc:"Studio en rez-de-chaussée, cuisine équipée, salle de bain privative avec WC.", communs:["Communs à tous","commun maison"]},
+  {id:"14",label:"Studio 14",groupe:"indep",sous:"principal",type:"Studio",etage:"3e étage",bat:"Principal",surface:12,loyer:500,folder:"14",desc:"Studio mansardé, 33 m² au sol. Accès par la cuisine commune du 2e étage.",communs:["Communs à tous","commun maison","Commun cuisine 2ème"]},
+  {id:"15",label:"Studio 15",groupe:"indep",sous:"principal",type:"Studio",etage:"3e étage",bat:"Principal",surface:16,loyer:500,folder:"15",desc:"Studio mansardé, 28 m² au sol. Accès par la cuisine commune du 2e étage.",communs:["Communs à tous","commun maison","Commun cuisine 2ème"]},
+  {id:"16",label:"T2 16",groupe:"indep",sous:"dependance",type:"T2",etage:"1er étage",bat:"Dépendance",surface:null,loyer:null,folder:"16",desc:"Deux-pièces meublé avec cuisine indépendante.",communs:["Communs à tous"]},
+  {id:"17",label:"T2 17",groupe:"indep",sous:"dependance",type:"T2",etage:"1er étage",bat:"Dépendance",surface:19,loyer:590,folder:"17",desc:"Deux-pièces meublé, 37 m² au sol, salle de bain privative.",communs:["Communs à tous"]},
+  {id:"18",label:"Studio 18",groupe:"indep",sous:"dependance",type:"Studio",etage:"RDC",bat:"Dépendance",surface:16,loyer:500,folder:"18",desc:"Studio meublé en rez-de-chaussée de la dépendance.",communs:["Communs à tous"]},
+  {id:"19",label:"Studio 19",groupe:"indep",sous:"dependance",type:"Studio",etage:"RDC",bat:"Dépendance",surface:17,loyer:500,folder:"19",desc:"Studio meublé en rez-de-chaussée de la dépendance.",communs:["Communs à tous"]},
+  {id:"20",label:"Studio 20",groupe:"indep",sous:"dependance",type:"Studio",etage:"RDC",bat:"Dépendance",surface:17,loyer:500,folder:"20",desc:"Studio meublé en rez-de-chaussée de la dépendance.",communs:["Communs à tous"]},
+  {id:"21",label:"Studio 21",groupe:"indep",sous:"dependance",type:"Studio",etage:"RDC",bat:"Dépendance",surface:16,loyer:500,folder:"21",desc:"Studio meublé en rez-de-chaussée de la dépendance.",communs:["Communs à tous"]},
+  {id:"2",label:"Chambre 2",groupe:"coloc",sous:"1er",type:"Chambre",etage:"1er étage",bat:"Principal",surface:12.5,loyer:400,folder:"2",desc:"Chambre avec salle de bain privative. Cuisine partagée sur le palier.",communs:["Communs à tous","commun maison","Communs cuisine 1er"]},
+  {id:"3",label:"Chambre 3",groupe:"coloc",sous:"1er",type:"Chambre",etage:"1er étage",bat:"Principal",surface:13,loyer:400,folder:"3",desc:"Chambre avec salle de bain privative. Cuisine partagée sur le palier.",communs:["Communs à tous","commun maison","Communs cuisine 1er"]},
+  {id:"4",label:"Chambre 4",groupe:"coloc",sous:"1er",type:"Chambre",etage:"1er étage",bat:"Principal",surface:27,loyer:590,folder:"4",desc:"Grande chambre avec cheminée, 27 m², salle de bain privative.",communs:["Communs à tous","commun maison","Communs cuisine 1er"]},
+  {id:"5",label:"Chambre 5",groupe:"coloc",sous:"1er",type:"Chambre",etage:"1er étage",bat:"Principal",surface:28,loyer:590,folder:"5",desc:"Grande chambre avec cheminée, 28 m², salle de bain privative.",communs:["Communs à tous","commun maison","Communs cuisine 1er"]},
+  {id:"6",label:"Chambre 6",groupe:"coloc",sous:"1er",type:"Chambre",etage:"1er étage",bat:"Principal",surface:22,loyer:590,folder:"6",desc:"Chambre avec cheminée décorative, 22 m², salle de bain privative.",communs:["Communs à tous","commun maison","Communs cuisine 1er"]},
+  {id:"7",label:"Chambre 7",groupe:"coloc",sous:"1er",type:"Chambre",etage:"1er étage",bat:"Principal",surface:16.39,loyer:490,folder:"7",desc:"Chambre lumineuse, salle de bain privative.",communs:["Communs à tous","commun maison","Communs cuisine 1er"]},
+  {id:"8",label:"Chambre 8",groupe:"coloc",sous:"2eme",type:"Chambre",etage:"2e étage",bat:"Principal",surface:18,loyer:490,folder:"8",desc:"Chambre avec salle de bain privative. Cuisine partagée sur le palier.",communs:["Communs à tous","commun maison","Commun cuisine 2ème"]},
+  {id:"9",label:"Chambre 9",groupe:"coloc",sous:"2eme",type:"Chambre",etage:"2e étage",bat:"Principal",surface:14,loyer:400,folder:"9",desc:"Chambre avec salle de bain privative.",communs:["Communs à tous","commun maison","Commun cuisine 2ème"]},
+  {id:"10",label:"Chambre 10",groupe:"coloc",sous:"2eme",type:"Chambre",etage:"2e étage",bat:"Principal",surface:22.14,loyer:590,folder:"10",desc:"Grande chambre avec cheminée, 22,14 m², salle de bain privative.",communs:["Communs à tous","commun maison","Commun cuisine 2ème"]},
+  {id:"11",label:"Chambre 11",groupe:"coloc",sous:"2eme",type:"Chambre",etage:"2e étage",bat:"Principal",surface:30,loyer:590,folder:"11",desc:"Grande chambre, 30 m², salle de bain privative.",communs:["Communs à tous","commun maison","Commun cuisine 2ème"]},
+  {id:"12",label:"Chambre 12",groupe:"coloc",sous:"2eme",type:"Chambre",etage:"2e étage",bat:"Principal",surface:23,loyer:590,folder:"12",desc:"Chambre avec cheminée, 23 m², salle de bain privative.",communs:["Communs à tous","commun maison","Commun cuisine 2ème"]},
+  {id:"13",label:"Chambre 13",groupe:"coloc",sous:"2eme",type:"Chambre",etage:"2e étage",bat:"Principal",surface:17,loyer:490,folder:"13",desc:"Chambre avec salle de bain privative.",communs:["Communs à tous","commun maison","Commun cuisine 2ème"]},
+];
+
+const COMMUNS_DEF=[
+  {folder:"Communs à tous",label:"Laverie",desc:"Machines à laver en libre service au sous-sol",target:"tous",icon:"🧺"},
+  {folder:"Communs à tous",label:"Salle de sport",desc:"Équipements de fitness en libre accès au sous-sol",target:"tous",icon:"🏋️"},
+  {folder:"Communs à tous",label:"Cour & Garage à vélo",desc:"Cour sécurisée, espace barbecue et garage à vélo",target:"tous",icon:"🚲"},
+  {folder:"commun maison",label:"Bâtiment principal",desc:"Parties communes du bâtiment principal",target:"tous",icon:"🏠"},
+  {folder:"Communs cuisine 1er",label:"Cuisine 1er étage",desc:"Réservée aux chambres 2 à 7",target:"1er",icon:"🍳"},
+  {folder:"Commun cuisine 2ème",label:"Cuisine 2ème étage",desc:"Réservée aux chambres 8 à 13 et studios 14 & 15",target:"2eme",icon:"🍳"},
+];
+
+const CLABELS={"Communs à tous":"Équipements communs","commun maison":"Bâtiment principal","Communs cuisine 1er":"Cuisine 1er étage","Commun cuisine 2ème":"Cuisine 2e étage"};
+
+function getDispo(id){
+  const d=dispoCache[String(id)];
+  if(!d) return{statut:'libre',date:''};
+  return d;
+}
+
+function badgeHtml(id,full=false){
+  const d=getDispo(id);
+  if(d.statut==='libre') return`<span class="badge b-libre">${full?'Disponible immédiatement':'Disponible'}</span>`;
+  if(d.statut==='occupe') return`<span class="badge b-occupe">${full?'Actuellement occupé':'Occupé'}</span>`;
+  if(d.statut==='date') return`<span class="badge b-date">${full?'Disponible à partir du '+d.date:'Dispo '+d.date}</span>`;
+  return`<span class="badge b-libre">Disponible</span>`;
+}
+
+function buildCard(l){
+  const cached=photoCache[l.folder];
+  const ph=(cached&&cached.length>0)?`<img src="${cached[0].url}" alt="${l.label}" loading="lazy">`:`<span style="font-size:11px;color:var(--gris)">Chargement…</span>`;
+  const d=document.createElement('div');
+  d.className='lot-card';
+  d.innerHTML=`<div class="lot-thumb" id="thumb-${l.id}">${ph}</div>
+    <div class="lot-body">
+      <div class="lot-title">${l.label}</div>
+      <div class="lot-meta">${l.type}${l.surface?' · '+l.surface+' m²':''} · Bât. ${l.bat}</div>
+      <div class="lot-footer">
+        <span class="lot-price">${l.loyer?l.loyer+' €/mois':'Sur demande'}</span>
+        ${badgeHtml(l.id)}
+      </div>
+    </div>`;
+  d.onclick=()=>openModal(l);
+  return d;
+}
+
+function buildGrids(){
+  const g={principal:0,dependance:0,'1er':0,'2eme':0};
+  ['principal','dependance','1er','2eme'].forEach(k=>document.getElementById('grid-'+k).innerHTML='');
+  LOTS.forEach(l=>{
+    const card=buildCard(l);
+    if(l.groupe==='indep'&&l.sous==='principal'){document.getElementById('grid-principal').appendChild(card);g.principal++;}
+    if(l.groupe==='indep'&&l.sous==='dependance'){document.getElementById('grid-dependance').appendChild(card);g.dependance++;}
+    if(l.groupe==='coloc'&&l.sous==='1er'){document.getElementById('grid-1er').appendChild(card);g['1er']++;}
+    if(l.groupe==='coloc'&&l.sous==='2eme'){document.getElementById('grid-2eme').appendChild(card);g['2eme']++;}
+  });
+  document.getElementById('cnt-principal').textContent=g.principal+' logement'+(g.principal>1?'s':'');
+  document.getElementById('cnt-dependance').textContent=g.dependance+' logement'+(g.dependance>1?'s':'');
+  document.getElementById('cnt-1er').textContent=g['1er']+' chambre'+(g['1er']>1?'s':'');
+  document.getElementById('cnt-2eme').textContent=g['2eme']+' chambre'+(g['2eme']>1?'s':'');
+}
+
+async function preloadThumbs(){
+  for(const l of LOTS){
+    fetchPhotos(l.folder).then(photos=>{
+      const el=document.getElementById('thumb-'+l.id);
+      if(el&&photos.length>0) el.innerHTML=`<img src="${photos[0].url}" alt="${l.label}" loading="lazy">`;
+    });
+  }
+}
+
+// CAROUSEL MODAL
+let mSlides=[],mIdx=0,mTouchX=0;
+
+function buildMCarousel(slides){
+  mSlides=slides; mIdx=0;
+  const track=document.getElementById('m-track');
+  const dots=document.getElementById('m-dots');
+  track.innerHTML=''; dots.innerHTML='';
+  if(!slides.length){
+    const s=document.createElement('div'); s.className='m-slide placeholder'; s.textContent='Chargement des photos…';
+    track.appendChild(s); return;
+  }
+  slides.forEach((sl,i)=>{
+    const s=document.createElement('div'); s.className='m-slide';
+    const img=document.createElement('img'); img.src=sl.url; img.alt=sl.name||''; img.loading=i===0?'eager':'lazy';
+    s.appendChild(img);
+    s.onclick=()=>openLightbox(i);
+    track.appendChild(s);
+    const dot=document.createElement('div'); dot.className='m-dot'+(i===0?' active':'');
+    dot.onclick=(e)=>{e.stopPropagation();goMSlide(i);}; dots.appendChild(dot);
+  });
+  updateMCarousel();
+}
+
+function updateMCarousel(){
+  document.getElementById('m-track').style.transform=`translateX(-${mIdx*100}%)`;
+  document.querySelectorAll('.m-dot').forEach((d,i)=>d.classList.toggle('active',i===mIdx));
+  const sl=mSlides[mIdx];
+  document.getElementById('m-label').textContent=sl?(sl.section||''):'';
+  document.getElementById('m-counter').textContent=mSlides.length?`${mIdx+1} / ${mSlides.length}`:'';
+  const dl=document.getElementById('m-dl');
+  if(sl&&sl.id){dl.href=`https://drive.google.com/uc?export=download&id=${sl.id}`;dl.style.display='block';}
+  else dl.style.display='none';
+}
+
+function mPrev(){goMSlide(mIdx>0?mIdx-1:mSlides.length-1);}
+function mNext(){goMSlide(mIdx<mSlides.length-1?mIdx+1:0);}
+function goMSlide(i){mIdx=i;updateMCarousel();}
+
+document.getElementById('m-carousel').addEventListener('touchstart',e=>{mTouchX=e.touches[0].clientX;},{passive:true});
+document.getElementById('m-carousel').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-mTouchX;if(Math.abs(dx)>40){dx<0?mNext():mPrev();}},{passive:true});
+
+async function openModal(l){
+  document.getElementById('m-title').textContent=l.label+(l.surface?` — ${l.surface} m²`:'');
+  document.getElementById('m-sub').textContent=`${l.type} · ${l.etage} · Bâtiment ${l.bat}`;
+  document.getElementById('m-desc').textContent=l.desc;
+  document.getElementById('m-info').innerHTML=`
+    <div class="m-info-item"><label>Surface</label><span>${l.surface?l.surface+' m²':'—'}</span></div>
+    <div class="m-info-item"><label>Loyer cc</label><span>${l.loyer?l.loyer+' €/mois':'—'}</span></div>
+    <div class="m-info-item"><label>Étage</label><span>${l.etage}</span></div>
+    <div class="m-info-item"><label>Disponibilité</label><span>${badgeHtml(l.id,true)}</span></div>`;
+  buildMCarousel([]);
+  document.getElementById('modal').classList.add('open');
+  const all=[];
+  const lp=await fetchPhotos(l.folder);
+  lp.forEach(p=>all.push({...p,section:l.label}));
+  for(const c of l.communs){
+    const cp=await fetchPhotos(c);
+    cp.forEach(p=>all.push({...p,section:CLABELS[c]||c}));
+  }
+  buildMCarousel(all);
+}
+
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+
+// LIGHTBOX PLEIN ÉCRAN
+let lbSlides=[],lbIdx=0,lbTouchX=0;
+
+function openLightbox(startIdx){
+  lbSlides=mSlides; lbIdx=startIdx;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function updateLightbox(){
+  const sl=lbSlides[lbIdx];
+  document.getElementById('lb-img').src=sl?sl.url:'';
+  document.getElementById('lb-label').textContent=sl?(sl.section||''):'';
+  document.getElementById('lb-counter').textContent=lbSlides.length?`${lbIdx+1} / ${lbSlides.length}`:'';
+  const dl=document.getElementById('lb-dl');
+  if(sl&&sl.id){dl.href=`https://drive.google.com/uc?export=download&id=${sl.id}`;dl.style.display='block';}
+  else dl.style.display='none';
+}
+
+function lbPrev(){lbIdx=lbIdx>0?lbIdx-1:lbSlides.length-1;updateLightbox();}
+function lbNext(){lbIdx=lbIdx<lbSlides.length-1?lbIdx+1:0;updateLightbox();}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');}
+
+document.getElementById('lightbox').addEventListener('touchstart',e=>{lbTouchX=e.touches[0].clientX;},{passive:true});
+document.getElementById('lightbox').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-lbTouchX;if(Math.abs(dx)>40){dx<0?lbNext():lbPrev();}},{passive:true});
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===e.currentTarget||e.target.id==='lb-img') return; closeLightbox();});
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('lightbox').classList.contains('open')){
+    if(e.key==='ArrowLeft') lbPrev();
+    if(e.key==='ArrowRight') lbNext();
+    if(e.key==='Escape') closeLightbox();
+  }
+  if(document.getElementById('modal').classList.contains('open')&&e.key==='Escape') closeModal();
+});
+
+// ESPACES COMMUNS
+async function buildCommuns(){
+  // Grande carte communs à tous — photo de couverture
+  const photosCommuns = await fetchPhotos('Communs à tous');
+  const photosMaison = await fetchPhotos('commun maison');
+  const allCommunsPhotos = [
+    ...photosCommuns.map(p=>({...p,section:'Espaces communs'})),
+    ...photosMaison.map(p=>({...p,section:'Bâtiment principal'}))
+  ];
+  const bigPhoto = document.getElementById('commun-big-photo');
+  if(allCommunsPhotos.length>0){
+    bigPhoto.innerHTML=`<img src="${allCommunsPhotos[0].url}" alt="Espaces communs" loading="lazy">`;
+    bigPhoto.onclick=()=>openCommunsAll();
+  }
+  // Stocker pour la lightbox
+  window._communsAllPhotos = allCommunsPhotos;
+
+  // Cuisines
+  const grids={'1er':'grid-cuisine-1er','2eme':'grid-cuisine-2eme'};
+  const cuisines=[
+    {folder:'Communs cuisine 1er',label:'Cuisine 1er étage',desc:'Réservée aux chambres 2 à 7',target:'1er',icon:'🍳'},
+    {folder:'Commun cuisine 2ème',label:'Cuisine 2ème étage',desc:'Réservée aux chambres 8 à 13 et studios 14 & 15',target:'2eme',icon:'🍳'},
+  ];
+  for(const c of cuisines){
+    const photos=await fetchPhotos(c.folder);
+    const grid=document.getElementById(grids[c.target]);
+    if(!grid) continue;
+    const card=document.createElement('div'); card.className='commun-card';
+    const ph=photos.length>0?`<img src="${photos[0].url}" alt="${c.label}" loading="lazy">`:`<span>${c.icon}</span>`;
+    card.innerHTML=`<div class="commun-thumb">${ph}</div>
+      <div class="commun-body"><h4>${c.label}</h4><p>${c.desc}</p>
+      <p class="voir">Voir les photos →</p></div>`;
+    card.onclick=()=>openCommunLightbox(photos,c.label);
+    grid.appendChild(card);
+  }
+}
+
+function openCommunsAll(){
+  const photos=window._communsAllPhotos||[];
+  if(!photos.length) return;
+  lbSlides=photos; lbIdx=0;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function openCommunLightbox(photos,label){
+  if(!photos||!photos.length) return;
+  lbSlides=photos.map(p=>({...p,section:label}));
+  lbIdx=0;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function showTab(t){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(t).classList.add('active');
+  const tabs=['presentation','independants','colocation','communs','contact'];
+  document.querySelectorAll('.nav-tab')[tabs.indexOf(t)].classList.add('active');
+}
+
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget) closeModal();});
+
+(async()=>{
+  await loadDispos();
+  buildGrids();
+  preloadThumbs();
+  buildCommuns();
+})();
+</script>
+</body>
+</html>
